@@ -11,6 +11,8 @@ app.get('/', function (req, res) { res.status(200).send('Hello bot world!')});
 
 app.post('/hello', helloBot);
 
+app.post('/roll', diceBot);
+
 app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(400).send(err.message);
