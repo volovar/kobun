@@ -1,0 +1,8 @@
+#ignore mac system files
+.DS_store
+
+#ignore node stuff
+node_modules
+
+#ignore config
+data
