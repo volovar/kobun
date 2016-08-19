@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
     var botPayload = {}
 
     if (req.body.text) {
-        matches = req.body.text.match(/^(\d{1,2})d(\d{1,2})$/);
+        matches = req.body.text.match(/^(\d{1,2})\s*d\s*(\d{1,3})$/);
 
         if (matches && matches[1] && matches[2]) {
             times = matches[1];
