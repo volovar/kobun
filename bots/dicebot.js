@@ -38,7 +38,7 @@ module.exports = function (req, res, next) {
         } else {
             return res.status(200).end();
         }
-    })
+    });
 };
 
 function roll (min, max) {
