@@ -5,6 +5,8 @@ module.exports = function (req, res, next) {
     text: ":argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:"
   };
 
+  botPayload.username = "tilebot";
+  botPayload.icon_emoji = ":argyle:";
   botPayload.channel = req.body.channel_id;
 
   send(botPayload, function (error, status, body) {
