@@ -1,9 +1,6 @@
 var request = require("request");
 
 module.exports = function (req, res, next) {
-  var MAX_WIDTH = 10;
-  var MAX_HEIGHT = 6;
-
   var botPayload = {
     text: ":argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:"
   };
@@ -29,6 +26,9 @@ module.exports = function (req, res, next) {
 };
 
 function createTileset (parameters) {
+  var MAX_WIDTH = 10;
+  var MAX_HEIGHT = 6;
+
   // check that width and height aren't larger than the max values
   var width = parameters[1] <= MAX_WIDTH ? parameters[1] : MAX_WIDTH;
   var height = parameters[2] <= MAX_HEIGHT ? parameters[2] : MAX_HEIGHT;
