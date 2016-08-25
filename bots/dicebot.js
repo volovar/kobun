@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
   };
 
   var rollBot = new Bot(settings);
-  rollBot.createText();
+  rollBot.botPayload.text = rollBot.createText();
 
   rollBot.send(function (error, status, body) {
     if (error) {
@@ -25,7 +25,7 @@ module.exports = function (req, res, next) {
 
   rollBot.roll = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+  };
 
   rollBot.createText = function () {
     var matches;
@@ -51,6 +51,6 @@ module.exports = function (req, res, next) {
       total += currentRoll;
     }
 
-    this.botPayload.text = req.body.user_name + ' rolled ' + times + 'd' + die + ':\n' + rolls.join(' + ') + ' = *' + total + '*';
-  }
+    return req.body.user_name + ' rolled ' + times + 'd' + die + ':\n' + rolls.join(' + ') + ' = *' + total + '*';
+  };
 };
