@@ -5,13 +5,13 @@ module.exports = function (req, res, next) {
     token: process.env.DICEBOT_TOKEN,
     botPayload: {
       username: "dicebot",
-      text: "Hi, " + req.body.user_name + " I'm testbot!",
       channel: req.body.channel_id,
       icon_emoji: ":game_die:"
     }
   };
 
   var rollBot = new Bot(settings);
+  rollBot.createText();
 
   rollBot.send(function (error, status, body) {
     if (error) {
