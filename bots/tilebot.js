@@ -11,16 +11,16 @@ var settings = {
 
 var tileBot = new Bot(settings);
 
-tileBot.handleRoute = function (req, res, next) {
+module.exports = function (req, res, next) {
   var parameters = req.body.text;
   var regex = /(\d+)\s*x\s*(\d+)\s*(\S+)/;
 
-  this.botPayload.channel = req.body.channel_id;
+  tileBot.botPayload.channel = req.body.channel_id;
   if (parameters) {
-    this.createTileset(parameters.match(regex));
+    tileBot.botPayload.text = tileBot.createTileset(parameters.match(regex));
   }
 
-  this.send(function (error, status, body) {
+  tileBot.send(function (error, status, body) {
       if (error) {
           return next(error);
       } else if (status !== 200) {
@@ -51,7 +51,5 @@ tileBot.createTileset = function (parameters) {
     tileset.push(row);
   }
 
-  this.botPayload.text = tileset.join("\n");
+  return tileset.join("\n");
 };
-
-module.exports = tileBot.handleRoute;
