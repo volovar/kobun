@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
     }
   };
 
-  var rollBot = new Bot(settings);
+  var diceBot = new Bot(settings);
 
   var matches;
   var times = 2;
@@ -35,9 +35,9 @@ module.exports = function (req, res, next) {
     total += currentRoll;
   }
 
-  rollBot.botPayload.text = req.body.user_name + ' rolled ' + times + 'd' + die + ':\n' + rolls.join(' + ') + ' = *' + total + '*';
+  diceBot.botPayload.text = req.body.user_name + ' rolled ' + times + 'd' + die + ':\n' + rolls.join(' + ') + ' = *' + total + '*';
 
-  rollBot.send(function (error, status, body) {
+  diceBot.send(function (error, status, body) {
     if (error) {
       return next(error);
     } else if (status !== 200) {
