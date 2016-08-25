@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
     botPayload: {
       username: req.body.user_name,
       channel: req.body.channel_id,
-      icon_url: "../images/metoo-image.png"
+      icon_url: "https://dl.dropboxusercontent.com/u/6481225/metoo-image.png"
     }
   }
 
