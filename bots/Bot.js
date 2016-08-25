@@ -33,10 +33,10 @@ Bot.prototype.send = function (payload, callback) {
 };
 
 Bot.prototype.isAuthorized = function (reqToken, reqTeamId) {
-  if (this.token !== reqToken && this.teamId !== reqTeamId ) {
-    return false;
-  } else {
+  if (this.token === reqToken && this.teamId === reqTeamId ) {
     return true;
+  } else {
+    return false;
   }
 }
 
