@@ -5,9 +5,8 @@ module.exports = function (req, res, next) {
     token: process.env.METOOBOT_TOKEN,
     botPayload: {
       username: req.body.user_name,
-      // text: req.body.text,
       channel: req.body.channel_id,
-      icon_emoji: ":control_knobs:"
+      icon_url: "../images/metoo-image.png"
     }
   }
 
