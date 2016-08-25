@@ -19,7 +19,7 @@ module.exports = function (req, res, next) {
     return res.status(401).end("Not Authorized");
   }
 
-  testBot.send(botPayload, function (error, status, body) {
+  testBot.send(testBot.botPayload, function (error, status, body) {
       if (error) {
           return next(error);
       } else if (status !== 200) {
