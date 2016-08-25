@@ -5,7 +5,6 @@ var settings = {
   botPayload: {
     username: "tilebot",
     text: ":argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:",
-    channel: req.body.channel_id,
     icon_emoji: ":argyle:"
   }
 }
@@ -16,6 +15,7 @@ module.exports = function (req, res, next) {
   var parameters = req.body.text;
   var regex = /(\d+)\s*x\s*(\d+)\s*(\S+)/;
 
+  tileBot.botPayload.channel = req.body.channel_id;
   if (parameters) {
     tileBot.botPayload.text = tileBot.createTileset(parameters.match(regex));
   }
