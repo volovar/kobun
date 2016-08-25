@@ -1,10 +1,19 @@
 var Bot = require("./Bot");
 
 module.exports = function (req, res, next) {
-  var testBot = new Bot(req, res);
+  var settings = {
+    token: process.env.TESTBOT_TOKEN,
+    teamId: process.env.TEAM_ID,
+    botPayload: {
+      username: "testbot",
+      text: "Hi, I'm testbot!"
+    }
+  }
+  var testBot = new Bot(settings);
 
-  var token = process.env.TOKEN || "token";
-  var teamID = process.env.TEAM_ID || "localhost";
+  if (testBot.isAuthorized(req.body.token, req.body.team_id)) {
+    return res.status(401).end("Not Authorized");
+  }
 
   return res.status(200).json(testBot.botPayload);
 };
