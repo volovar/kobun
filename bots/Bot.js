@@ -15,6 +15,7 @@ Bot.prototype.getToken = function () {
   return this.token;
 }
 
+// data to send back to slack
 Bot.prototype.send = function (payload, callback) {
   var path = process.env.INCOMING_WEBHOOK_PATH;
   var uri = 'https://hooks.slack.com/services' + path;
@@ -32,8 +33,9 @@ Bot.prototype.send = function (payload, callback) {
   });
 };
 
+// returns true if provided token and team id match the bots token and team id
 Bot.prototype.isAuthorized = function (reqToken, reqTeamId) {
-  if (this.token === reqToken && this.teamId === reqTeamId ) {
+  if (this.getToken() === reqToken && this.getTeam() === reqTeamId ) {
     return true;
   } else {
     return false;

@@ -2,25 +2,30 @@ var Bot = require("./Bot");
 
 module.exports = function (req, res, next) {
   var settings = {
-    token: process.env.TESTBOT_TOKEN || "Hu6C4VYZizX4bUy8Xl8Dr3I8",
-    teamId: process.env.TEAM_ID || "T09Q15U78",
+    token: process.env.TESTBOT_TOKEN,
+    teamId: process.env.TEAM_ID,
     botPayload: {
       username: "testbot",
-      text: "Hi, I'm testbot!"
+      text: "Hi, " + req.body.user_name + " I'm testbot!",
+      channel: req.body.channel_id,
+      icon_emoji: ":control_knobs:"
     }
   }
+
   var testBot = new Bot(settings);
 
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
-  console.log(req.body);
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
-  console.log(req.body.token);
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
-  console.log(req.body.team_id);
-
+  // check if request is authorized return 401 otherwise
   if (!testBot.isAuthorized(req.body.token, req.body.team_id)) {
     return res.status(401).end("Not Authorized");
   }
 
-  return res.status(200).json(settings);
+  testBot.send(botPayload, function (error, status, body) {
+      if (error) {
+          return next(error);
+      } else if (status !== 200) {
+          return next(new Error('Incoming WebHook: ' + status + ' ' + body));
+      } else {
+          return res.status(200).end();
+      }
+  });
 };
