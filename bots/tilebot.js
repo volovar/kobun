@@ -16,7 +16,7 @@ module.exports = function (req, res, next) {
   var regex = /(\d+)\s*x\s*(\d+)\s*(\S+)/;
 
   if (parameters) {
-    tileBot.botPayload.text = tileBot.createTileset(parameters.match(regex));
+    tileBot.botPayload.text = createTileset(parameters.match(regex));
   }
 
   tileBot.send(function (error, status, body) {
@@ -28,27 +28,27 @@ module.exports = function (req, res, next) {
           return res.status(200).end();
       }
   });
+};
 
-  tileBot.prototype.createTileset = function (parameters) {
-    var MAX_WIDTH = 10;
-    var MAX_HEIGHT = 6;
+function createTileset (parameters) {
+  var MAX_WIDTH = 10;
+  var MAX_HEIGHT = 6;
 
-    // check that width and height aren't larger than the max values
-    var width = parameters[1] <= MAX_WIDTH ? parameters[1] : MAX_WIDTH;
-    var height = parameters[2] <= MAX_HEIGHT ? parameters[2] : MAX_HEIGHT;
-    var text = parameters[3];
-    var tileset = [];
+  // check that width and height aren't larger than the max values
+  var width = parameters[1] <= MAX_WIDTH ? parameters[1] : MAX_WIDTH;
+  var height = parameters[2] <= MAX_HEIGHT ? parameters[2] : MAX_HEIGHT;
+  var text = parameters[3];
+  var tileset = [];
 
-    for (var i = 0; i < height; i++) {
-      var row = "";
+  for (var i = 0; i < height; i++) {
+    var row = "";
 
-      for (var j = 0; j < width; j++) {
-        row += text;
-      }
-
-      tileset.push(row);
+    for (var j = 0; j < width; j++) {
+      row += text;
     }
 
-    return tileset.join("\n");
+    tileset.push(row);
   }
-};
+
+  return tileset.join("\n");
+}
