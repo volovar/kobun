@@ -17,7 +17,7 @@ app.post('/roll', diceBot);
 
 app.post('/tile', tileBot);
 
-app.get('/test', testBot);
+app.post('/test', testBot);
 
 app.use(function (err, req, res, next) {
     console.error(err.stack);
