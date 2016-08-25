@@ -29,7 +29,7 @@ module.exports = function (req, res, next) {
       }
   });
 
-  tileBot.createTileset = function (parameters) {
+  tileBot.prototype.createTileset = function (parameters) {
     var MAX_WIDTH = 10;
     var MAX_HEIGHT = 6;
 
