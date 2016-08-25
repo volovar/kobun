@@ -1,9 +1,8 @@
-var Bot = require("./Bot");
+var Bot = require("./SlashBot");
 
 module.exports = function (req, res, next) {
   var settings = {
     token: process.env.TESTBOT_TOKEN,
-    teamId: process.env.TEAM_ID,
     botPayload: {
       username: "testbot",
       text: "Hi, " + req.body.user_name + " I'm testbot!",
@@ -14,7 +13,7 @@ module.exports = function (req, res, next) {
 
   var testBot = new Bot(settings);
 
-  // check if request is authorized return 401 otherwise
+  // check if request is authorized
   if (!testBot.isAuthorized(req.body.token, req.body.team_id)) {
     return res.status(401).end("Not Authorized");
   }
