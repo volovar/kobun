@@ -10,10 +10,10 @@ module.exports = function (req, res, next) {
     }
   }
   var testBot = new Bot(settings);
-
-  if (!testBot.isAuthorized(req.body.token, req.body.team_id)) {
-    return res.status(401).end("Not Authorized");
-  }
+  //
+  // if (!testBot.isAuthorized(req.body.token, req.body.team_id)) {
+  //   return res.status(401).end("Not Authorized");
+  // }
 
   return res.status(200).json(testBot.botPayload);
 };
