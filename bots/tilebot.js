@@ -1,22 +1,23 @@
 var Bot = require("./SlashBot");
 
-module.exports = function (req, res, next) {
-  var settings = {
-    token: process.env.TILEBOT_TOKEN,
-    botPayload: {
-      username: "tilebot",
-      text: ":argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:",
-      channel: req.body.channel_id,
-      icon_emoji: ":argyle:"
-    }
+var settings = {
+  token: process.env.TILEBOT_TOKEN,
+  botPayload: {
+    username: "tilebot",
+    text: ":argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:\n:argyle::argyle::argyle::argyle:",
+    channel: req.body.channel_id,
+    icon_emoji: ":argyle:"
   }
+}
 
-  var tileBot = new Bot(settings);
+var tileBot = new Bot(settings);
+
+module.exports = function (req, res, next) {
   var parameters = req.body.text;
   var regex = /(\d+)\s*x\s*(\d+)\s*(\S+)/;
 
   if (parameters) {
-    tileBot.botPayload.text = createTileset(parameters.match(regex));
+    tileBot.botPayload.text = tileBot.createTileset(parameters.match(regex));
   }
 
   tileBot.send(function (error, status, body) {
@@ -30,7 +31,7 @@ module.exports = function (req, res, next) {
   });
 };
 
-function createTileset (parameters) {
+tileBot.createTileset = function (parameters) {
   var MAX_WIDTH = 10;
   var MAX_HEIGHT = 6;
 
@@ -51,4 +52,4 @@ function createTileset (parameters) {
   }
 
   return tileset.join("\n");
-}
+};
