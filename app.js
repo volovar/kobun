@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var helloBot = require('./bots/hellobot');
 var diceBot = require('./bots/dicebot');
 var tileBot = require('./bots/tilebot');
+var testBot = require('./bots/testbot');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -15,6 +16,8 @@ app.post('/hello', helloBot);
 app.post('/roll', diceBot);
 
 app.post('/tile', tileBot);
+
+app.get('/test', testBot);
 
 app.use(function (err, req, res, next) {
     console.error(err.stack);
