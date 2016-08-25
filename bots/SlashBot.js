@@ -20,15 +20,15 @@ SlashBot.prototype.send = function (callback) {
   var uri = 'https://hooks.slack.com/services' + path;
 
   request({
-      uri: uri,
-      method: 'POST',
-      body: JSON.stringify(this.botPayload)
+    uri: uri,
+    method: 'POST',
+    body: JSON.stringify(this.botPayload)
   }, function (error, response, body) {
-      if (error) {
-          return callback(error);
-      }
+    if (error) {
+      return callback(error);
+    }
 
-      callback(null, response.statusCode, body);
+    callback(null, response.statusCode, body);
   });
 };
 
