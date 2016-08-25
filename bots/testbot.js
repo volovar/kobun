@@ -11,6 +11,13 @@ module.exports = function (req, res, next) {
   }
   var testBot = new Bot(settings);
 
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
+  console.log(req.body);
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
+  console.log(req.body.token);
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
+  console.log(req.body.team_id);
+
   if (!testBot.isAuthorized(req.body.token, req.body.team_id)) {
     return res.status(401).end("Not Authorized");
   }
